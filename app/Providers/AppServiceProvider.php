@@ -6,7 +6,6 @@ use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Pagination\Paginator;
-use Illuminate\Support\Facades\DB;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -30,10 +29,10 @@ class AppServiceProvider extends ServiceProvider
         Schema::defaultStringLength(191);
         Blade::aliasComponent('admin.components.message', 'message');
 
-        if (DB::table('configuracoes')->where('id', 1)->count() > 0) {
+        if($configuracoes = \App\Models\Configuracoes::find(1)->count() > 0){
             $configuracoes = \App\Models\Configuracoes::find(1); 
-            View()->share('configuracoes', $configuracoes);        
-        }
+            View()->share('configuracoes', $configuracoes);
+        }        
 
         Paginator::useBootstrap();
     }
