@@ -60,12 +60,13 @@ class AdminController extends Controller
         $parceirosUnavailable = Parceiro::unavailable()->count();
         $parceirosTotal = Parceiro::all()->count();
         //Parceiros Mais
-        $parceirosTop = Parceiro::where(DB::raw('YEAR(created_at)'), '=', date('Y'))
-                ->limit(4)->available()->get()->sortByDesc('views');
-        $totalviewsparceiros = Parceiro::selectRaw('SUM(views) AS VIEWS')
+        $parceirosTop = Parceiro::orderBy('views', 'DESC')
+                ->limit(6)->available()->get;
+        $totalviewsparceiros = Parceiro::orderBy('views', 'DESC')
                 ->available()
-                ->where( DB::raw('YEAR(created_at)'), '=', date('Y') )
-                ->first();
+                ->limit(6)
+                ->get()
+                ->sum('views');
         //Roteiros
         $roteirosAvailable = Roteiro::available()->count();
         $roteirosUnavailable = Roteiro::unavailable()->count();
@@ -122,7 +123,7 @@ class AdminController extends Controller
             'totalviewsroteiros' => $totalviewsroteiros,
             //Parceiros
             'parceirosTop' => $parceirosTop,
-            'totalviewsparceiros' => $totalviewsparceiros->VIEWS,
+            'totalviewsparceiros' => $totalviewsparceiros,
             //Passeios
             'passeiosAvailable' => $passeiosAvailable,
             'passeiosUnavailable' => $passeiosUnavailable,
