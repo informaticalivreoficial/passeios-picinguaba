@@ -536,7 +536,7 @@ $config1 = [
     <!-- /.modal-dialog -->
 </div>
 
-
+<!--
 <div class="modal fade" id="modal-qrcode">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -548,18 +548,18 @@ $config1 = [
             </div>
             <div class="modal-body text-center">                  
                 @php 
-                    if(!empty($config->dominio) && empty(!$config->logomarca)){
-                        echo '<p>Este QrCode direciona para: '.$config->dominio.'</p>';
-                        $qrcode = 'data:image/png;base64,'.base64_encode(QrCode::format('png')
-                            ->merge($config->getlogomarca(), .22, true)
-                            ->errorCorrection('H')
-                            ->size(300)
-                            ->generate($config->dominio));
+                    // if(!empty($config->dominio) && empty(!$config->logomarca)){
+                    //     echo '<p>Este QrCode direciona para: '.$config->dominio.'</p>';
+                    //     $qrcode = 'data:image/png;base64,'.base64_encode(QrCode::format('png')
+                    //         ->merge($config->getlogomarca(), .22, true)
+                    //         ->errorCorrection('H')
+                    //         ->size(300)
+                    //         ->generate($config->dominio));
 
-                        echo '<img src="'.$qrcode.'">';
-                    }else{
-                        echo '<p>Para gerar o QrCode complete as informações do site!</p>';
-                    }
+                    //     echo '<img src="'.$qrcode.'">';
+                    // }else{
+                    //     echo '<p>Para gerar o QrCode complete as informações do site!</p>';
+                    // }
                 @endphp  
             </div>
             <div class="modal-footer">
@@ -568,6 +568,7 @@ $config1 = [
         </div>        
     </div>
 </div>
+-->
 @stop
 
 @section('css')
