@@ -72,12 +72,13 @@ class AdminController extends Controller
         $roteirosUnavailable = Roteiro::unavailable()->count();
         $roteirosTotal = Roteiro::all()->count();
         //Roteiros Mais
-        $roteirosTop = Roteiro::where(DB::raw('YEAR(created_at)'), '=', date('Y'))
-                ->limit(4)->available()->get()->sortByDesc('views');
-        $totalviewsroteiros = Roteiro::selectRaw('SUM(views) AS VIEWS')
+        $roteirosTop = Roteiro::orderBy('views', 'DESC')
+                ->limit(6)->available()->get();
+        $totalviewsroteiros = Roteiro::orderBy('views', 'DESC')
                 ->available()
-                ->where( DB::raw('YEAR(created_at)'), '=', date('Y') )
-                ->first();        
+                ->limit(6)
+                ->get()
+                ->sum('views');  
         //Passeios
         $passeiosAvailable = Passeio::available()->count();
         $passeiosUnavailable = Passeio::unavailable()->count();
