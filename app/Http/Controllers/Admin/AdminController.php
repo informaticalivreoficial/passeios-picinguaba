@@ -61,7 +61,7 @@ class AdminController extends Controller
         $parceirosTotal = Parceiro::all()->count();
         //Parceiros Mais
         $parceirosTop = Parceiro::orderBy('views', 'DESC')
-                ->limit(6)->available()->get;
+                ->limit(6)->available()->get();
         $totalviewsparceiros = Parceiro::orderBy('views', 'DESC')
                 ->available()
                 ->limit(6)
