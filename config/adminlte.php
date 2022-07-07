@@ -315,6 +315,28 @@ return [
             'text' => 'Pedidos',
             'url'  => 'admin/pedidos',
             'icon' => 'fas fa-money-check',
+        ],
+        [
+            'text' => 'Email',            
+            'icon' => 'fas fa-fw fa-envelope',
+            'submenu' => [
+                [
+                    'text' => 'Enviar Email',
+                    'url'  => 'admin/email/enviar-email',
+                ],
+                [
+                    'text' => 'Listas',
+                    'url'  => 'admin/listas',
+                ],
+                [
+                    'text' => 'Cadastrar Lista',
+                    'url'  => 'admin/listas/cadastrar',
+                ],
+                [
+                    'text' => 'Cadastrar Email',
+                    'url'  => 'admin/listas/email/cadastrar',
+                ],
+            ]
         ], 
         
     ],
