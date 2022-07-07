@@ -32,12 +32,28 @@ class AdminController extends Controller
         $postsArtigos = Post::where('tipo', 'artigo')->count();
         $postsNoticias = Post::where('tipo', 'noticia')->count();
         $postsPaginas = Post::where('tipo', 'pagina')->count();
-        $artigosTop = Post::where(DB::raw('YEAR(created_at)'), '=', date('Y'))
-                ->limit(4)->postson()->get()->sortByDesc('views');
-        $totalViewsArtigos = Post::selectRaw('SUM(views) AS VIEWS')
+        $artigosTop = Post::orderBy('views', 'DESC')
+                ->where('tipo', 'artigo')
+                ->limit(6)
+                ->postson()   
+                ->get();
+        $totalViewsArtigos = Post::orderBy('views', 'DESC')
+                ->where('tipo', 'artigo')
                 ->postson()
-                ->where( DB::raw('YEAR(created_at)'), '=', date('Y') )
-                ->first();
+                ->limit(6)
+                ->get()
+                ->sum('views');
+        $paginasTop = Post::orderBy('views', 'DESC')
+                ->where('tipo', 'pagina')
+                ->limit(6)
+                ->postson()   
+                ->get();
+        $totalViewsPaginas = Post::orderBy('views', 'DESC')
+                ->where('tipo', 'pagina')
+                ->postson()
+                ->limit(6)
+                ->get()
+                ->sum('views');
 
         //Parceiros
         $parceirosAvailable = Parceiro::available()->count();
@@ -97,7 +113,7 @@ class AdminController extends Controller
             'postsNoticias' => $postsNoticias,
             'postsPaginas' => $postsPaginas,
             'artigosTop' => $artigosTop,
-            'artigostotalviews' => $totalViewsArtigos->VIEWS,
+            'artigostotalviews' => $totalViewsArtigos,
             //Roteiros
             'roteirosAvailable' => $roteirosAvailable,
             'roteirosUnavailable' => $roteirosUnavailable,
