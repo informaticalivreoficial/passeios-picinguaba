@@ -183,7 +183,7 @@ class ParceiroController extends Controller
     {
         $parceirodelete = Parceiro::where('id', $request->id)->first();
         $parceiroGb = ParceiroGb::where('parceiro_id', $parceirodelete->id)->first();
-        $nome = getPrimeiroNome(Auth::user()->name);
+        $nome = \App\Helpers\Renato::getPrimeiroNome(Auth::user()->name);
 
         if(!empty($parceirodelete)){
             if(!empty($parceiroGb)){
@@ -208,7 +208,7 @@ class ParceiroController extends Controller
             //Remove Imagens
             if(!empty($imageDelete)){
                 Storage::delete($imageDelete->path);
-                Cropper::flush($imageDelete->path);
+                //Cropper::flush($imageDelete->path);
                 $imageDelete->delete();
                 Storage::deleteDirectory('parceiros/'.$parceirodelete->id);
                 $parceirodelete->delete();

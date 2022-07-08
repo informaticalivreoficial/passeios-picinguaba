@@ -49,8 +49,8 @@
                     <tr style="{{ ($slide->status == '1' ? '' : 'background: #fffed8 !important;')  }}">                            
                         <td class="text-center">
                             @php
-                                if(!empty($slide->imagem) && \Illuminate\Support\Facades\File::exists(public_path() . '/storage/' . $slide->imagem)){
-                                    $cover = url('storage/'.$slide->imagem);
+                                if(!empty($slide->imagem) && \Illuminate\Support\Facades\Storage::exists(env('AWS_PASTA') . $slide->imagem)){
+                                    $cover = \Illuminate\Support\Facades\Storage::url($slide->imagem);
                                 } else {
                                     $cover = url(asset('backend/assets/images/image.jpg'));
                                 }
@@ -61,7 +61,7 @@
                         </td>
                         <td>{{$slide->titulo}}</td>
                         <td class="text-center">{{$slide->created_at}}</td>
-                        <td class="text-center">{!!comparaDataExpira($slide->expira)!!}</td>
+                        <td class="text-center">{!!\App\Helpers\Renato::comparaDataExpira($slide->expira)!!}</td>
                         <td class="text-center">{{$slide->link}}</td>                            
                         <td class="acoes">
                             <input type="checkbox" data-onstyle="success" data-offstyle="warning" data-size="mini" class="toggle-class" data-id="{{ $slide->id }}" data-toggle="toggle" data-style="slow" data-on="<i class='fas fa-check'></i>" data-off="<i style='color:#fff !important;' class='fas fa-exclamation-triangle'></i>" {{ $slide->status == true ? 'checked' : ''}}>

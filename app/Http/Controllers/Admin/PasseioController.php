@@ -103,7 +103,7 @@ class PasseioController extends Controller
     public function delete(Request $request)
     {
         $passeiodelete = Passeio::where('id', $request->id)->first();
-        $nome = getPrimeiroNome(Auth::user()->name);
+        $nome = \App\Helpers\Renato::getPrimeiroNome(Auth::user()->name);
 
         if(!empty($passeiodelete)){
             $json = "<b>$nome</b> você tem certeza que deseja excluir este passeio?";

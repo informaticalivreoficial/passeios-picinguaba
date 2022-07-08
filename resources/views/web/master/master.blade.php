@@ -84,7 +84,7 @@
                                         <li><i class="fas fa-envelope"></i>{{$configuracoes->email}}</li>
                                     @endif
                                     @if ($configuracoes->whatsapp)
-                                        <li><i class="fab fa-whatsapp"></i><a href="{{getNumZap($configuracoes->whatsapp ,'Atendimento '. $configuracoes->nomedosite)}}">{{$configuracoes->whatsapp}}</a></li>
+                                        <li><i class="fab fa-whatsapp"></i><a href="{{\App\Helpers\WhatsApp::getNumZap($configuracoes->whatsapp ,'Atendimento '. $configuracoes->nomedosite)}}">{{$configuracoes->whatsapp}}</a></li>
                                     @endif
                                     @if ($configuracoes->bairro)
                                         <li><i class="fas fa-map-marker-alt"></i>{{$configuracoes->bairro}}</li>
@@ -213,7 +213,7 @@
                                 <ul>
                                     @if ($configuracoes->whatsapp)
                                         <li><i class="fab fa-whatsapp"></i> 
-                                            <a href="{{getNumZap($configuracoes->whatsapp ,'Atendimento '. $configuracoes->nomedosite)}}">{{$configuracoes->whatsapp}}</a>
+                                            <a href="{{\App\Helpers\WhatsApp::getNumZap($configuracoes->whatsapp ,'Atendimento '. $configuracoes->nomedosite)}}">{{$configuracoes->whatsapp}}</a>
                                         </li>                                        
                                     @endif
                                     @if ($configuracoes->telefone1)
@@ -288,7 +288,7 @@
     </footer>
 
     <div class="whatsapp-footer">
-        <a target="_blank" href="{{getNumZap($configuracoes->whatsapp ,$configuracoes->nomedosite)}}" title="WhatsApp">
+        <a target="_blank" href="{{\App\Helpers\WhatsApp::getNumZap($configuracoes->whatsapp ,$configuracoes->nomedosite)}}" title="WhatsApp">
             <img src="{{url(asset('frontend/assets/images/zap-topo.png'))}}" alt="{{url(asset('frontend/assets/images/zap-topo.png'))}}" title="WhatsApp" />
         </a>
     </div>

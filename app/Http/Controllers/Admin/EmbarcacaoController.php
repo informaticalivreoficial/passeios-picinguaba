@@ -124,8 +124,8 @@ class EmbarcacaoController extends Controller
     {
         $imageDelete = EmbarcacaoGb::where('id', $request->image)->first();
 
-        Storage::delete($imageDelete->path);
-        Cropper::flush($imageDelete->path);
+        Storage::delete(env('AWS_PASTA') . $imageDelete->path);
+        //Cropper::flush($imageDelete->path);
         $imageDelete->delete();
 
         $json = [
@@ -146,7 +146,7 @@ class EmbarcacaoController extends Controller
     {
         $embarcacaodelete = Embarcacao::where('id', $request->id)->first();
         $embarcacaoGb = EmbarcacaoGb::where('embarcacao_id', $embarcacaodelete->id)->first();
-        $nome = getPrimeiroNome(Auth::user()->name);
+        $nome = \App\Helpers\Renato::getPrimeiroNome(Auth::user()->name);
 
         if(!empty($embarcacaodelete)){
             if(!empty($embarcacaoGb)){
@@ -169,10 +169,10 @@ class EmbarcacaoController extends Controller
 
         if(!empty($embarcacaodelete)){
             if(!empty($imageDelete)){
-                Storage::delete($imageDelete->path);
-                Cropper::flush($imageDelete->path);
+                Storage::delete(env('AWS_PASTA') . $imageDelete->path);
+                //Cropper::flush($imageDelete->path);
                 $imageDelete->delete();
-                Storage::deleteDirectory('embarcacoes/'.$embarcacaodelete->id);
+                Storage::deleteDirectory(env('AWS_PASTA') . 'embarcacoes/'.$embarcacaodelete->id);
                 $embarcacaodelete->delete();
             }
             $embarcacaodelete->delete();

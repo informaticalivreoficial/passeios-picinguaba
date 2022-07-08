@@ -15,12 +15,12 @@ class EmailController extends Controller
 
     public function send(Request $request)
     {
-        if($request->parametro == 'empresa'){
-            $empresa = Empresa::where('id', $request->id)->first();
-            return view('admin.email.send',[
-                'empresa' => $empresa
-            ]);
-        }
+        // if($request->parametro == 'empresa'){
+        //     $empresa = Empresa::where('id', $request->id)->first();
+        //     return view('admin.email.send',[
+        //         'empresa' => $empresa
+        //     ]);
+        // }
         if($request->parametro == 'user'){
             $user = User::where('id', $request->id)->first();
             return view('admin.email.send',[

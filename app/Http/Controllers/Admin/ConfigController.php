@@ -51,37 +51,37 @@ class ConfigController extends Controller
 
         if(!empty($request->file('metaimg'))){
             Storage::delete($config->metaimg);
-            Cropper::flush($config->metaimg);
+            //Cropper::flush($config->metaimg);
             $config->metaimg = '';
         }
         
         if(!empty($request->file('logomarca'))){
             Storage::delete($config->logomarca);
-            Cropper::flush($config->logomarca);
+            //Cropper::flush($config->logomarca);
             $config->logomarca = '';
         }
         
         if(!empty($request->file('logomarca_admin'))){
             Storage::delete($config->logomarca_admin);
-            Cropper::flush($config->logomarca_admin);
+            //Cropper::flush($config->logomarca_admin);
             $config->logomarca_admin = '';
         }
         
         if(!empty($request->file('favicon'))){
             Storage::delete($config->favicon);
-            Cropper::flush($config->favicon);
+            //Cropper::flush($config->favicon);
             $config->favicon = '';
         }
         
         if(!empty($request->file('marcadagua'))){
             Storage::delete($config->marcadagua);
-            Cropper::flush($config->marcadagua);
+            //Cropper::flush($config->marcadagua);
             $config->marcadagua = '';
         }
         
         if(!empty($request->file('imgheader'))){
             Storage::delete($config->imgheader);
-            Cropper::flush($config->imgheader);
+            //Cropper::flush($config->imgheader);
             $config->imgheader = '';
         }
         
@@ -112,7 +112,7 @@ class ConfigController extends Controller
         }
         
         if(!$config->save()){
-            return redirect()->back()->withInput()->withErrors();
+            return redirect()->back()->withInput()->withErrors('Erro');
         }
 
         return redirect()->route('configuracoes.editar', $config->id)->with([

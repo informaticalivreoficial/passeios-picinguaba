@@ -208,7 +208,7 @@ class PostController extends Controller
     {
         $postdelete = Post::where('id', $request->id)->first();
         $postGb = PostGb::where('post', $postdelete->id)->first();
-        $nome = getPrimeiroNome(Auth::user()->name);
+        $nome = \App\Helpers\Renato::getPrimeiroNome(Auth::user()->name);
 
         $tipo = ($postdelete->tipo == 'artigo' ? 'este artigo' : 
                  ($postdelete->tipo == 'noticia' ? 'esta notícia' : 
@@ -240,7 +240,7 @@ class PostController extends Controller
         if(!empty($postdelete)){
             if(!empty($imageDelete)){
                 Storage::delete($imageDelete->path);
-                Cropper::flush($imageDelete->path);
+                //Cropper::flush($imageDelete->path);
                 $imageDelete->delete();
                 Storage::deleteDirectory($secao.'/'.$postdelete->id);
                 $postdelete->delete();

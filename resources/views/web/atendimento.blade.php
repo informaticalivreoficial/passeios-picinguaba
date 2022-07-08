@@ -63,7 +63,7 @@
                   <div class="media contact-info">
                       <span class="contact-info__icon"><i class="fab fa-whatsapp"></i></span>
                       <div class="media-body">
-                          <h3><a href="{{getNumZap($configuracoes->whatsapp ,'Atendimento '. $configuracoes->nomedosite)}}">{{$configuracoes->whatsapp}}</a></h3>                          
+                          <h3><a href="{{\App\Helpers\WhatsApp::getNumZap($configuracoes->whatsapp ,'Atendimento '. $configuracoes->nomedosite)}}">{{$configuracoes->whatsapp}}</a></h3>                          
                       </div>
                   </div>                                        
                 @endif

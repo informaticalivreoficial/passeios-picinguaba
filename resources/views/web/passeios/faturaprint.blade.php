@@ -39,7 +39,7 @@
             <address>
               <strong>{{$configuracoes->nomedosite}}.</strong><br>
               {{$configuracoes->rua}}, {{$configuracoes->num}}<br>
-              {{$configuracoes->bairro}}, {{getCidadeNome($configuracoes->cidade, 'cidades')}}<br>
+              {{$configuracoes->bairro}}, {{\App\Helpers\Cidade::getCidadeNome($configuracoes->cidade, 'cidades')}}<br>
               Tel: {{$configuracoes->whatsapp}}<br>
               Email: {{$configuracoes->email}}
             </address>

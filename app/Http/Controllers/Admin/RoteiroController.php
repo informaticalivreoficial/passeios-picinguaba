@@ -174,7 +174,7 @@ class RoteiroController extends Controller
     {
         $roteirodelete = Roteiro::where('id', $request->id)->first();
         $roteiroGb = RoteiroGb::where('roteiro_id', $roteirodelete->id)->first();
-        $nome = getPrimeiroNome(Auth::user()->name);
+        $nome = \App\Helpers\Renato::getPrimeiroNome(Auth::user()->name);
 
         if(!empty($roteirodelete)){
             if(!empty($roteiroGb)){
@@ -198,7 +198,7 @@ class RoteiroController extends Controller
         if(!empty($roteirodelete)){
             if(!empty($imageDelete)){
                 Storage::delete($imageDelete->path);
-                Cropper::flush($imageDelete->path);
+                //Cropper::flush($imageDelete->path);
                 $imageDelete->delete();
                 Storage::deleteDirectory('roteiros/'.$roteirodelete->id);
                 $roteirodelete->delete();

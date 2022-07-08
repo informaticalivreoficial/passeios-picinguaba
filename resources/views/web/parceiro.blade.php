@@ -131,10 +131,10 @@
                         {{$parceiro->bairro}}
                     @endif
                     @if ($parceiro->bairro && $parceiro->uf)
-                        - {{getCidadeNome($parceiro->cidade, 'cidades')}}
+                        - {{\App\Helpers\Cidade::getCidadeNome($parceiro->cidade, 'cidades')}}
                     @endif
                     @if(!$parceiro->bairro && $parceiro->uf)
-                        {{getCidadeNome($parceiro->cidade, 'cidades')}}
+                        {{\App\Helpers\CidadegetCidadeNome($parceiro->cidade, 'cidades')}}
                     @endif
                     @if ($parceiro->cep)
                         - {{$parceiro->cep}}

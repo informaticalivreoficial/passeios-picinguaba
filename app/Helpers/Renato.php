@@ -50,4 +50,27 @@ class Renato
         
         return $valor;
     }
+
+    /**
+    * <b>Compara datas:</b> compara duas datas e retorna se expirado
+    * @return HTML = texto Expirado!
+    */
+    public static function comparaDataExpira($data)
+    {
+        if(empty($data)){
+            return null;
+        }
+
+        $dt_atual		     = date("Y-m-d"); // data atual
+        $timestamp_dt_atual  = strtotime($dt_atual); // converte para timestamp
+        $dt_expira		     = $data; // data de expiração
+        $timestamp_dt_expira = strtotime($dt_expira); // converte para timestamp
+
+        if($timestamp_dt_atual > $timestamp_dt_expira){
+            return '<span style="color:red;">Expirado</span>';
+        }else{
+            return date('d/m/Y', strtotime($data));
+        }
+    }
+
 }

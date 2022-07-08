@@ -46,7 +46,7 @@
                 </div>
             @else
             <div class="col-12">
-                <div class="alert alert-info">Olá <b>{{getPrimeiroNome(Session()->get('cliente')[0]->name)}}</b>, 
+                <div class="alert alert-info">Olá <b>{{\App\Helpers\Renato::getPrimeiroNome(Session()->get('cliente')[0]->name)}}</b>, 
                     desculpe não encontramos seus passeios, caso precise de suporte acesse nossa página de atendimento</div>
             </div>            
             @endif            

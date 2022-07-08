@@ -158,7 +158,7 @@ class UserController extends Controller
     public function delete(Request $request)
     {
         $user = User::where('id', $request->id)->first();
-        $nome = getPrimeiroNome(Auth::user()->name);
+        $nome = \App\Helpers\Renato::getPrimeiroNome(Auth::user()->name);
         if(!empty($user)){
             if($user->id == Auth::user()->id){
                 $json = "<b>$nome</b> você não pode excluir sua própria conta!";
@@ -189,7 +189,7 @@ class UserController extends Controller
                       ($user->admin == '1' && $user->client == '0' ? 'Administrador' :
                       ($user->admin == '0' && $user->client == '1' ? 'Cliente' : 'Cliente')));
             Storage::delete($user->avatar);
-            Cropper::flush($user->avatar);
+            //Cropper::flush($user->avatar);
             $user->delete();
         }
         if($user->admin == '1' || $user->Editor == '1'){
