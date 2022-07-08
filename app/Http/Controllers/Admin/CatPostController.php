@@ -133,10 +133,10 @@ class CatPostController extends Controller
         if(!empty($categoria)){
             if(!empty($post) && !empty($postgb)){
                 $postgb = PostGb::where('post', $post->id)->first();
-                Storage::delete($postgb->path);
+                Storage::delete(env('AWS_PASTA') . $postgb->path);
                 //Cropper::flush($postgb->path);
                 $postgb->delete();
-                Storage::deleteDirectory($secao.'/'.$post->id);
+                Storage::deleteDirectory(env('AWS_PASTA') . $secao.'/'.$post->id);
                 $categoria->delete();
             }
             $categoria->delete();

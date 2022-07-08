@@ -50,37 +50,37 @@ class ConfigController extends Controller
         $config = Configuracoes::where('id', $id)->first(); 
 
         if(!empty($request->file('metaimg'))){
-            Storage::delete($config->metaimg);
+            Storage::delete(env('AWS_PASTA') . $config->metaimg);
             //Cropper::flush($config->metaimg);
             $config->metaimg = '';
         }
         
         if(!empty($request->file('logomarca'))){
-            Storage::delete($config->logomarca);
+            Storage::delete(env('AWS_PASTA') . $config->logomarca);
             //Cropper::flush($config->logomarca);
             $config->logomarca = '';
         }
         
         if(!empty($request->file('logomarca_admin'))){
-            Storage::delete($config->logomarca_admin);
+            Storage::delete(env('AWS_PASTA') . $config->logomarca_admin);
             //Cropper::flush($config->logomarca_admin);
             $config->logomarca_admin = '';
         }
         
         if(!empty($request->file('favicon'))){
-            Storage::delete($config->favicon);
+            Storage::delete(env('AWS_PASTA') . $config->favicon);
             //Cropper::flush($config->favicon);
             $config->favicon = '';
         }
         
         if(!empty($request->file('marcadagua'))){
-            Storage::delete($config->marcadagua);
+            Storage::delete(env('AWS_PASTA') . $config->marcadagua);
             //Cropper::flush($config->marcadagua);
             $config->marcadagua = '';
         }
         
         if(!empty($request->file('imgheader'))){
-            Storage::delete($config->imgheader);
+            Storage::delete(env('AWS_PASTA') . $config->imgheader);
             //Cropper::flush($config->imgheader);
             $config->imgheader = '';
         }

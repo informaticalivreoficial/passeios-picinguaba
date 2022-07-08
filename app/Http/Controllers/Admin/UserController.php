@@ -8,7 +8,6 @@ use Illuminate\Support\Facades\Storage;
 use App\Http\Requests\Admin\User as UserRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
-use App\Support\Cropper;
 use App\Models\Cidades;
 use App\Models\Estados;
 use App\Models\User;
@@ -117,8 +116,8 @@ class UserController extends Controller
         }
 
         if(!empty($request->file('avatar'))){
-            Storage::delete($user->avatar);
-            Cropper::flush($user->avatar);
+            Storage::delete(env('AWS_PASTA') . $user->avatar);
+            //Cropper::flush($user->avatar);
             $user->avatar = '';
         }
 
@@ -188,7 +187,7 @@ class UserController extends Controller
             $perfil = ($user->admin == '1' && $user->client == '1' ? 'Administrador e Cliente' :
                       ($user->admin == '1' && $user->client == '0' ? 'Administrador' :
                       ($user->admin == '0' && $user->client == '1' ? 'Cliente' : 'Cliente')));
-            Storage::delete($user->avatar);
+            Storage::delete(env('AWS_PASTA') . $user->avatar);
             //Cropper::flush($user->avatar);
             $user->delete();
         }

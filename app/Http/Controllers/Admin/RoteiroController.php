@@ -10,7 +10,6 @@ use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
 use Image;
-use App\Support\Cropper;
 use App\Models\Roteiro;
 use App\Models\RoteiroGb;
 use Illuminate\Http\Request;
@@ -112,10 +111,10 @@ class RoteiroController extends Controller
         $imagensGallery = RoteiroGb::where('roteiro_id', $request->id)->get();        
         if(!empty($Configuracoes->marcadagua) && !empty($imagensGallery)){
             foreach($imagensGallery as $imagem){   
-                $img = Image::make(Storage::get($imagem->path));   
+                $img = Image::make(Storage::get(env('AWS_PASTA') . $imagem->path));   
                 /* insert watermark at bottom-right corner with 10px offset */
-                $img->insert(Storage::get($Configuracoes->marcadagua), 'bottom-right', 10, 10);                
-                $img->save(storage_path('app/public/'.$imagem->path));
+                $img->insert(Storage::get(env('AWS_PASTA') . $Configuracoes->marcadagua), 'bottom-right', 10, 10);                
+                $img->save(Storage::disk('s3')->exists(env('AWS_PASTA') , $imagem->path));
                 $img->encode('png'); 
             }
             $affected = DB::table('roteiro_gbs')->where('roteiro_id', '=', $request->id)->update(array('marcadagua' => 1));            
@@ -152,8 +151,8 @@ class RoteiroController extends Controller
     {
         $imageDelete = RoteiroGb::where('id', $request->image)->first();
 
-        Storage::delete($imageDelete->path);
-        Cropper::flush($imageDelete->path);
+        Storage::delete(env('AWS_PASTA') . $imageDelete->path);
+        //Cropper::flush($imageDelete->path);
         $imageDelete->delete();
 
         $json = [
@@ -197,10 +196,10 @@ class RoteiroController extends Controller
 
         if(!empty($roteirodelete)){
             if(!empty($imageDelete)){
-                Storage::delete($imageDelete->path);
+                Storage::delete(env('AWS_PASTA') . $imageDelete->path);
                 //Cropper::flush($imageDelete->path);
                 $imageDelete->delete();
-                Storage::deleteDirectory('roteiros/'.$roteirodelete->id);
+                Storage::deleteDirectory(env('AWS_PASTA') . 'roteiros/'.$roteirodelete->id);
                 $roteirodelete->delete();
             }
             $roteirodelete->delete();

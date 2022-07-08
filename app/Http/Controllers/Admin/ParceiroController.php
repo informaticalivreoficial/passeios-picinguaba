@@ -91,8 +91,8 @@ class ParceiroController extends Controller
         $parceiro = Parceiro::where('id', $id)->first();        
 
         if(!empty($request->hasFile('logomarca'))){
-            Storage::delete($parceiro->logomarca);
-            Cropper::flush($parceiro->logomarca);
+            Storage::delete(env('AWS_PASTA') . $parceiro->logomarca);
+            //Cropper::flush($parceiro->logomarca);
             $parceiro->logomarca = '';
         }
 
@@ -169,8 +169,8 @@ class ParceiroController extends Controller
     {
         $imageDelete = ParceiroGb::where('id', $request->image)->first();
 
-        Storage::delete($imageDelete->path);
-        Cropper::flush($imageDelete->path);
+        Storage::delete(env('AWS_PASTA') . $imageDelete->path);
+        //Cropper::flush($imageDelete->path);
         $imageDelete->delete();
 
         $json = [
@@ -207,15 +207,15 @@ class ParceiroController extends Controller
         if(!empty($parceirodelete)){
             //Remove Imagens
             if(!empty($imageDelete)){
-                Storage::delete($imageDelete->path);
+                Storage::delete(env('AWS_PASTA') . $imageDelete->path);
                 //Cropper::flush($imageDelete->path);
                 $imageDelete->delete();
-                Storage::deleteDirectory('parceiros/'.$parceirodelete->id);
+                Storage::deleteDirectory(env('AWS_PASTA') . 'parceiros/'.$parceirodelete->id);
                 $parceirodelete->delete();
             }
             //Remove Logomarca
-            Storage::delete($parceirodelete->logomarca);
-            Cropper::flush($parceirodelete->logomarca);
+            Storage::delete(env('AWS_PASTA') .$parceirodelete->logomarca);
+            //Cropper::flush($parceirodelete->logomarca);
             $parceirodelete->delete();
         }
 

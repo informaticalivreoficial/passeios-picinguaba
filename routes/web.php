@@ -11,6 +11,7 @@ use App\Http\Controllers\Admin\PasseioController;
 use App\Http\Controllers\Admin\RoteiroController;
 use App\Http\Controllers\Admin\ConfigController;
 use App\Http\Controllers\Admin\EmbarcacaoController;
+use App\Http\Controllers\Admin\NewsletterController;
 use App\Http\Controllers\Admin\ParceiroController;
 use App\Http\Controllers\Admin\PedidoController;
 use App\Http\Controllers\Admin\SitemapController;
