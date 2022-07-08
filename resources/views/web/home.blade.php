@@ -59,7 +59,7 @@
                     <div class="single-place mb-30">
                         <div class="place-img">
                             <a style="color: #007bff;"  href="{{route('web.roteiro', ['slug' => $roteiro->slug])}}">
-                                <img src="{{$roteiro->cover()}}" alt="{{$roteiro->nocover()}}">
+                                <img class="img-fluid" src="{{$roteiro->cover()}}" alt="{{$roteiro->nocover()}}">
                             </a>
                         </div>
                         <div class="place-cap">
@@ -96,7 +96,7 @@
                     <div class="blog-img-cap">
                         <div class="blog-img">
                             <a href="{{route('web.blog.artigo',['slug' => $artigo->slug])}}">
-                                <img src="{{$artigo->cover()}}" alt="{{$artigo->cover()}}">
+                                <img height="278" class="img-fluid" src="{{$artigo->cover()}}" alt="{{$artigo->cover()}}">
                             </a>
                         </div>
                         <div class="blog-cap">
@@ -135,7 +135,7 @@
                 <div class="single-services text-center mb-30">
                     <div class="">
                         <a href="{{route('web.parceiro',['slug' => $parceiro->slug])}}">
-                            <img class="img-fluid" src="{{$parceiro->cover()}}" alt="{{$parceiro->name}}">
+                            <img height="278"  src="{{$parceiro->cover()}}" alt="{{$parceiro->name}}">
                         </a>
                     </div>
                     <div class="services-cap">
@@ -152,7 +152,12 @@
 @endsection
 
 @section('css')
-
+<style>
+    .img-fluid {
+        max-width: 100%;
+        height: auto;
+    }
+</style>
 @endsection
 
 @section('js')
