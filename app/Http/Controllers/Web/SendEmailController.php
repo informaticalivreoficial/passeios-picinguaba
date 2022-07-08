@@ -48,7 +48,7 @@ class SendEmailController extends Controller
             
             Mail::send(new ParceiroSend($data));
             
-            $json = 'Obrigado '.getPrimeiroNome($request->nome).' sua mensagem foi enviada para nosso parceiro <b>'.$parceiro->name.'</b> com sucesso!'; 
+            $json = 'Obrigado '.\App\Helpers\Renato::getPrimeiroNome($request->nome).' sua mensagem foi enviada para nosso parceiro <b>'.$parceiro->name.'</b> com sucesso!'; 
             return response()->json(['sucess' => $json]);
         }
     }
@@ -91,7 +91,7 @@ class SendEmailController extends Controller
             Mail::send(new Atendimento($data));
             Mail::send(new AtendimentoRetorno($retorno));
             
-            $json = 'Obrigado '.getPrimeiroNome($request->nome).' sua mensagem foi enviada com sucesso!'; 
+            $json = 'Obrigado '.\App\Helpers\Renato::getPrimeiroNome($request->nome).' sua mensagem foi enviada com sucesso!'; 
             return response()->json(['sucess' => $json]);
         }
     }

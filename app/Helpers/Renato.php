@@ -73,4 +73,61 @@ class Renato
         }
     }
 
+    /**
+    * <b>Limpa Cpf Cnpj:</b> remove todos os caracteres e retorna 
+    * somente os números
+    * @return HTML = número sem caracteres!
+    */
+    public static function limpaCPF_CNPJ($valor){
+
+        if(empty($valor)){
+            return null;
+        }
+        
+        $valor = trim($valor);
+        $valor = str_replace(".", "", $valor);
+        $valor = str_replace(",", "", $valor);
+        $valor = str_replace("-", "", $valor);
+        $valor = str_replace("/", "", $valor);
+
+        return $valor;
+    }
+
+    /**
+    * <b>Valida CPF:</b> valida cpf 
+    * somente os números
+    * @return BOOLEAN = retorna se o cpf é válido ou não True ou False!
+    */
+    public static function validaCPF($cpf) {
+
+        if(empty($cpf)){
+            return null;
+        }
+ 
+        // Extrai somente os números
+        $cpf = preg_replace( '/[^0-9]/is', '', $cpf );
+        
+        // Verifica se foi informado todos os digitos corretamente
+        if (strlen($cpf) != 11) {
+            return false;
+        }
+
+        // Verifica se foi informada uma sequência de digitos repetidos. Ex: 111.111.111-11
+        if (preg_match('/(\d)\1{10}/', $cpf)) {
+            return false;
+        }
+
+        // Faz o calculo para validar o CPF
+        for ($t = 9; $t < 11; $t++) {
+            for ($d = 0, $c = 0; $c < $t; $c++) {
+                $d += $cpf[$c] * (($t + 1) - $c);
+            }
+            $d = ((10 * $d) % 11) % 10;
+            if ($cpf[$c] != $d) {
+                return false;
+            }
+        }
+        return true;
+    }
+
 }

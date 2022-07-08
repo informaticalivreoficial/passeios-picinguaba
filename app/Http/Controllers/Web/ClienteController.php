@@ -47,12 +47,12 @@ class ClienteController extends Controller
             return response()->json(['error' => $json]);
         }
         
-        if(validaCPF($request->cpf) == false){
+        if(\App\Helpers\Renato::validaCPF($request->cpf) == false){
             $json = "<strong>ERRO</strong> o CPF informado é inválido!"; 
             return response()->json(['error' => $json]);
         }
 
-        $cpf = limpaCPF_CNPJ($request->cpf);        
+        $cpf = \App\Helpers\Renato::limpaCPF_CNPJ($request->cpf);        
         $cliente = User::where('cpf', $cpf)->where('client', 1)->first();
 
         if($request->session()->get('cliente')){
