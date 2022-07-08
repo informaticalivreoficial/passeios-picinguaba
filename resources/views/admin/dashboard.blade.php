@@ -168,7 +168,7 @@
                     if($roteirotop->views == '0'){
                         $percentr = 1;
                     }else{
-                        $percentr = substr(( $roteirotop['views'] / $totalviewsroteiros->VIEWS ) * 100, 0, 5);
+                        $percentr = substr(( $roteirotop['views'] / $totalviewsroteiros ) * 100, 0, 5);
                     }
                     $percenttagr = str_replace(",", ".", $percentr);
                 @endphp
