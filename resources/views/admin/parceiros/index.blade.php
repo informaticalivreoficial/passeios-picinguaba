@@ -59,7 +59,7 @@
                                     , {{$parceiro->bairro}}
                                 @endif
                                 @if($parceiro->rua != '' || $parceiro->num != '' || $parceiro->bairro != '')
-                                    - {{ \App\Helpers\Cidade::getCidadeNome($parceiro->cidade, 'cidades') }}
+                                    - {{ \App\Helpers\Cidade::getCidadeNome($parceiro->cidade, 'cidades') ?? '' }}
                                 @endif
                             </li>
                             @if($parceiro->telefone)
