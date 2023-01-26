@@ -59,7 +59,7 @@
                                     , {{$parceiro->bairro}}
                                 @endif
                                 @if($parceiro->rua != '' || $parceiro->num != '' || $parceiro->bairro != '')
-                                    - {{ getCidadeNome($parceiro->cidade, 'cidades') }}
+                                    - {{ \App\Helpers\Cidade::getCidadeNome($parceiro->cidade, 'cidades') }}
                                 @endif
                             </li>
                             @if($parceiro->telefone)
@@ -116,7 +116,7 @@
                         <input type="checkbox" data-onstyle="success" data-offstyle="warning" data-size="mini" class="toggle-class" data-id="{{ $parceiro->id }}" data-toggle="toggle" data-style="slow" data-on="<i class='fas fa-check'></i>" data-off="<i style='color:#fff !important;' class='fas fa-exclamation-triangle'></i>" {{ $parceiro->status == true ? 'checked' : ''}}> 
                         
                         @if($parceiro->whatsapp != '')
-                            <a target="_blank" href="{{getNumZap($parceiro->whatsapp)}}" class="btn btn-xs btn-success text-white"><i class="fab fa-whatsapp"></i></a>
+                            <a target="_blank" href="{{\App\Helpers\WhatsApp::getNumZap($parceiro->whatsapp)}}" class="btn btn-xs btn-success text-white"><i class="fab fa-whatsapp"></i></a>
                         @endif 
                         <a href="{{route('email.send',['id' => $parceiro->id, 'parametro' => 'parceiro'] )}}" class="btn btn-xs text-white bg-teal"><i class="fas fa-envelope"></i></a>
                         @if (!empty($parceiro->link))
