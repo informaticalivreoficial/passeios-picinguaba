@@ -5,7 +5,7 @@
         <meta http-equiv="x-ua-compatible" content="ie=edge">  
         <meta name="language" content="pt-br" />  
         <meta name="robots" content="index, follow"/>      
-        <meta name="description" content="Venha desfrutar de momentos inesquecíveis a bordo da {{$configuracoes->nomedosite}}. Nossas embarcações são altamente seguras e confortáveis. Nosso Roteiro principal é a Ilha das Couves.*Para outros roteiros consulte nos."/>
+        <meta name="description" content="{{$configuracoes->descricao}}"/>
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="shortcut icon" type="image/x-icon" href="{{$configuracoes->getfaveicon()}}">
         <meta name="csrf-token" content="{{ csrf_token() }}">
