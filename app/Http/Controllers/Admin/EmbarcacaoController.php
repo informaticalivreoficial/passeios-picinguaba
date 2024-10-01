@@ -48,7 +48,7 @@ class EmbarcacaoController extends Controller
             foreach ($request->allFiles()['files'] as $image) {
                 $embarcacaoGb = new EmbarcacaoGb();
                 $embarcacaoGb->embarcacao_id = $embarcacaoCreate->id;
-                $embarcacaoGb->path = $image->storeAs('embarcacoes/' . $embarcacaoCreate->id, Str::slug($request->name) . '-' . str_replace('.', '', microtime(true)) . '.' . $image->extension());
+                $embarcacaoGb->path = $image->storeAs(env('AWS_PASTA') . 'embarcacoes/' . $embarcacaoCreate->id, Str::slug($request->name) . '-' . str_replace('.', '', microtime(true)) . '.' . $image->extension());
                 $embarcacaoGb->save();
                 unset($embarcacaoGb);
             }
@@ -89,7 +89,7 @@ class EmbarcacaoController extends Controller
             foreach ($request->allFiles()['files'] as $image) {
                 $embarcacaoImage = new EmbarcacaoGb();
                 $embarcacaoImage->embarcacao_id = $embarcacao->id;
-                $embarcacaoImage->path = $image->storeAs('embarcacoes/' . $embarcacao->id, Str::slug($request->name) . '-' . str_replace('.', '', microtime(true)) . '.' . $image->extension());
+                $embarcacaoImage->path = $image->storeAs(env('AWS_PASTA') . 'embarcacoes/' . $embarcacao->id, Str::slug($request->name) . '-' . str_replace('.', '', microtime(true)) . '.' . $image->extension());
                 $embarcacaoImage->save();
                 unset($embarcacaoImage);
             }

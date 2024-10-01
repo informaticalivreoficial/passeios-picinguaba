@@ -50,7 +50,7 @@ class RoteiroController extends Controller
             foreach ($request->allFiles()['files'] as $image) {
                 $roteiroGb = new RoteiroGb();
                 $roteiroGb->roteiro_id = $roteiroCreate->id;
-                $roteiroGb->path = $image->storeAs('roteiros/' . $roteiroCreate->id, Str::slug($request->name) . '-' . str_replace('.', '', microtime(true)) . '.' . $image->extension());
+                $roteiroGb->path = $image->storeAs(env('AWS_PASTA') . 'roteiros/' . $roteiroCreate->id, Str::slug($request->name) . '-' . str_replace('.', '', microtime(true)) . '.' . $image->extension());
                 $roteiroGb->save();
                 unset($roteiroGb);
             }
@@ -91,7 +91,7 @@ class RoteiroController extends Controller
             foreach ($request->allFiles()['files'] as $image) {
                 $roteiroImage = new RoteiroGb();
                 $roteiroImage->roteiro_id = $roteiro->id;
-                $roteiroImage->path = $image->storeAs('roteiros/' . $roteiro->id, Str::slug($request->name) . '-' . str_replace('.', '', microtime(true)) . '.' . $image->extension());
+                $roteiroImage->path = $image->storeAs(env('AWS_PASTA') . 'roteiros/' . $roteiro->id, Str::slug($request->name) . '-' . str_replace('.', '', microtime(true)) . '.' . $image->extension());
                 $roteiroImage->save();
                 unset($roteiroImage);
             }
