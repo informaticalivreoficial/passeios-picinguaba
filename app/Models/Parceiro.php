@@ -68,8 +68,8 @@ class Parceiro extends Model
             $cover = $images->first(['path']);
         }
 
-        if(empty($metaimg['path']) || !Storage::disk()->exists(env('AWS_PASTA') . $metaimg['path'])) {
-            if(empty($this->logomarca) || !Storage::disk()->exists(env('AWS_PASTA') . $this->logomarca)) {
+        if(empty($metaimg['path']) || !Storage::disk()->exists($metaimg['path'])) {
+            if(empty($this->logomarca) || !Storage::disk()->exists($this->logomarca)) {
                 return url(asset('backend/assets/images/image.jpg'));
             }
             return Storage::url($this->logomarca, 300, 300);
@@ -81,7 +81,7 @@ class Parceiro extends Model
 
     public function cover()
     {       
-        if(empty($this->logomarca) || !Storage::disk()->exists(env('AWS_PASTA') . $this->logomarca)) {
+        if(empty($this->logomarca) || !Storage::disk()->exists($this->logomarca)) {
             return url(asset('backend/assets/images/image.jpg'));
         }
 
@@ -91,7 +91,7 @@ class Parceiro extends Model
 
     public function nocover()
     {       
-        if(empty($this->logomarca) || !Storage::disk()->exists(env('AWS_PASTA') . $this->logomarca)) {
+        if(empty($this->logomarca) || !Storage::disk()->exists($this->logomarca)) {
             return url(asset('backend/assets/images/image.jpg'));
         }
 
